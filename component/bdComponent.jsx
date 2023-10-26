@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 const fetchProdutos = async () => {
   try {
-    const response = await axios.get('http://10.4.96.59:8082/users/todos');
+    const response = await axios.get('http://localhost:8083/users/todos');
     return response.data;
   } catch (error) {
     console.error("Erro ao buscar produtos:", error);
