@@ -26,7 +26,7 @@ export default function MyComponent(){
   return (
     <>
         <div className='h-screen w-full bg-red-600'>
-            {users.map(user => (
+            {users?.map(user => (
                 <div className='text-black' key={user.id}>Usuario: {user.nome}</div>
             ))}
         </div>
