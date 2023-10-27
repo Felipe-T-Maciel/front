@@ -1,4 +1,35 @@
+import axios from "axios";
+import { useState } from "react";
+
 export default function Login() {
+
+    const [matricula, setMatricula] = useState("")
+    const [senha, setSenha] = useState("")
+
+    const fetchProdutos = async () => {
+        try {
+            console.log('dawdawda')
+          const response = await axios.get('http://localhost:8083/users/verificaLogin',{
+            params: {
+                matricula,
+                senha,
+            },
+          });
+
+          if(response.data){
+            window.location.href = "http://localhost:3000/Aluno";
+          }else{
+            alert('Matricula ou senha invalida')
+            setMatricula("")
+            setSenha("")
+          }
+
+          return response.data;
+        } catch (error) {
+          console.error("Erro ao buscar produtos:", error);
+        }
+      };
+
     return(
         <>
             <div className="w-full h-screen">
@@ -9,15 +40,17 @@ export default function Login() {
                                 <p className="text-white text-5xl font-bold select-none">Entrar</p>
                             </div>
                             <div className="flex flex-col w-full items-center gap-4">
-                                <input type="email" className="h-[4rem] p-4 w-[50%] rounded-xl duration-300 hover:scale-[1.01] text-xl focus:scale-[1.03]" placeholder="Email" />
-                                <input type="password" className="h-[4rem] p-4 w-[50%] rounded-xl duration-300 hover:scale-[1.01] text-xl focus:scale-[1.03]" placeholder="Senha" />
+                                <input type="text" className="h-[4rem] p-4 w-[50%] rounded-xl duration-300 hover:scale-[1.01] text-xl focus:scale-[1.03]" placeholder="Matrícula" value={matricula} onChange={(e) => setMatricula(e.target.value)} />
+                                <input type="password" className="h-[4rem] p-4 w-[50%] rounded-xl duration-300 hover:scale-[1.01] text-xl focus:scale-[1.03]" placeholder="Senha" value={senha} onChange={(e) => setSenha(e.target.value)} />
                             </div>
                             <div className="w-full flex justify-center">
-                                <button className="bg-green-500 h-[4rem] p-4 w-[30%] rounded-xl text-white text-xl font-bold  duration-300 hover:scale-110">Confirmar</button>
+                                <button className="bg-green-500 h-[4rem] p-4 w-[30%] rounded-xl text-white text-xl font-bold  duration-300 hover:scale-110" onClick={() => fetchProdutos()}>Confirmar</button>
                             </div>
                         </div>
                     </div>
-                    <div className="w-[55%] absolute right-0 h-screen bg-cover bg-center bg-[url('https://chat.google.com/u/0/api/get_attachment_url?url_type=FIFE_URL&content_type=image%2Fpng&attachment_token=AOo0EEX53YDLG9OoZnw5DIBn1IM2l2xMNfbzM50yiKuxcSMB87f2iT7wnfJ3l5VE25h0CzfGxCEU2fIhXzs9xMEaucSaMeK2QbxxXoz8q2xnlmS4aHL3nbZTCVl5GdqNlSNPKwB0xmp%2B1qtqvfTZWH4hQ3Q2Pf3zAKJf4SBqSNMuYf0tiHpX1lqN8uh6IDfCEub97DHH1uPLufeQoKZMtjmfCZWG8x0L2zFuoH0XVXx4LPpwKwXjqYO5dYyKdQGMQu9yckcQ1VfbWCOHmwrazSFbtew%2FpEwnFRyL5fo6h47boEb0aZL4Gex4i6omNmR1S6lmrARWaxsJiFFoNb%2Bn2l%2Fm9wwciGZbiLcrleL0nVhFTgf8eyDbERf%2B%2BM%2BpKMv%2FwHfb3ujMAUX77DwGI6w%2FXLgsW75NCkMtwEk26RZTmfbY43HZ9nTPz0beddxbK8bqOMMT4LmHzXz9wwEw6sTW6%2BHkpaTpc7RnVVHolfiqUCapifg2R%2FatRmZ7qst9JVxLhnq%2Bw4oGCSMfF7o%2BTY%2BliQ%2FYL0BM6siqWGfc3POczqnaNZISdB5jD2iG%2BA2aQxP9zAnbvQ%3D%3D&sz=w1920-h931')]"></div>
+                    <div className="w-[55%] absolute right-0 h-screen bg-cover bg-center bg-[url('https://chat.google.com/u/0/api/get_attachment_url?url_type=FIFE_URL&content_type=image%2Fpng&attachment_token=AOo0EEX53YDLG9OoZnw5DIBn1IM2l2xMNfbzM50yiKuxcSMB87f2iT7wnfJ3l5VE25h0CzfGxCEU2fIhXzs9xMEaucSaMeK2QbxxXoz8q2xnlmS4aHL3nbZTCVl5GdqNlSNPKwB0xmp%2B1qtqvfTZWH4hQ3Q2Pf3zAKJf4SBqSNMuYf0tiHpX1lqN8uh6IDfCEub97DHH1uPLufeQoKZMtjmfCZWG8x0L2zFuoH0XVXx4LPpwKwXjqYO5dYyKdQGMQu9yckcQ1VfbWCOHmwrazSFbtew%2FpEwnFRyL5fo6h47boEb0aZL4Gex4i6omNmR1S6lmrARWaxsJiFFoNb%2Bn2l%2Fm9wwciGZbiLcrleL0nVhFTgf8eyDbERf%2B%2BM%2BpKMv%2FwHfb3ujMAUX77DwGI6w%2FXLgsW75NCkMtwEk26RZTmfbY43HZ9nTPz0beddxbK8bqOMMT4LmHzXz9wwEw6sTW6%2BHkpaTpc7RnVVHolfiqUCapifg2R%2FatRmZ7qst9JVxLhnq%2Bw4oGCSMfF7o%2BTY%2BliQ%2FYL0BM6siqWGfc3POczqnaNZISdB5jD2iG%2BA2aQxP9zAnbvQ%3D%3D&sz=w1920-h931')]"
+                        
+                    ></div>
                 </div>
             </div>
         </>
