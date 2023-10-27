@@ -1,8 +1,36 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { setCookie } from 'cookies-next';
+import { getCookie } from 'cookies-next';
 
 export default function Login() {
 
+    useEffect(() => {
+        const fetchData = async () =>{
+            if(getCookie('usuario')!=undefined){
+                setMatricula(getCookie('usuario'))
+                    const usuario = await axios.get('http://localhost:8083/users',{
+                  params: {
+                      matricula,
+                  },
+                });
+                    if(usuario.data){
+                        setCookie('usuario', usuario.data.matricula);
+                        if(usuario.data.tipo == "Aluno"){
+                            window.location.href = "http://localhost:3000/Aluno";
+                        } else if(usuario.data.tipo == "Professor"){
+                
+                            window.location.href = "http://localhost:3000/Professor";
+                        }else if(usuario.data.tipo == "Secretario"){
+                
+                            window.location.href = "http://localhost:3000/Secretario";
+                        }
+                    }
+            }
+        }
+        fetchData();
+    })
+    
     const [matricula, setMatricula] = useState("")
     const [senha, setSenha] = useState("")
 
@@ -18,7 +46,23 @@ export default function Login() {
                 });
       
                 if(response.data){
-                  window.location.href = "http://localhost:3000/Aluno";
+                    const usuario = await axios.get('http://localhost:8083/users',{
+                  params: {
+                      matricula,
+                  },
+                });
+                    if(usuario.data){
+                        setCookie('usuario', usuario.data.matricula);
+                        if(usuario.data.tipo == "Aluno"){
+                            window.location.href = "http://localhost:3000/Aluno";
+                        } else if(usuario.data.tipo == "Professor"){
+                
+                            window.location.href = "http://localhost:3000/Professor";
+                        }else if(usuario.data.tipo == "Secretario"){
+                
+                            window.location.href = "http://localhost:3000/Secretario";
+                        }
+                    }
                 }else{
                   alert('Matricula ou senha invalida')
                   setMatricula("")
