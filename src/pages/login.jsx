@@ -7,27 +7,36 @@ export default function Login() {
     const [senha, setSenha] = useState("")
 
     const fetchProdutos = async () => {
-        try {
-            console.log('dawdawda')
-          const response = await axios.get('http://localhost:8083/users/verificaLogin',{
-            params: {
-                matricula,
-                senha,
-            },
-          });
-
-          if(response.data){
-            window.location.href = "http://localhost:3000/Aluno";
-          }else{
+        if(matricula>0 && matricula.length>0 && matricula.length<8){
+            try {
+            
+                const response = await axios.get('http://localhost:8083/users/verificaLogin',{
+                  params: {
+                      matricula,
+                      senha,
+                  },
+                });
+      
+                if(response.data){
+                  window.location.href = "http://localhost:3000/Aluno";
+                }else{
+                  alert('Matricula ou senha invalida')
+                  setMatricula("")
+                  setSenha("")
+                }
+      
+                return response.data;
+              } catch (error) {
+                alert('Matricula ou senha invalida')
+                setMatricula("")
+                setSenha("")
+                console.error("Erro ao buscar produtos:", error);
+              }
+        }else{
             alert('Matricula ou senha invalida')
             setMatricula("")
             setSenha("")
           }
-
-          return response.data;
-        } catch (error) {
-          console.error("Erro ao buscar produtos:", error);
-        }
       };
 
     return(
