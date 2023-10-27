@@ -1,4 +1,4 @@
-import HeaderComponent from "../../component/HeaderComponent";
+import HeaderComponent from "../component/HeaderComponent";
 export default function Secretario() {
     return(
         <>
