@@ -1,20 +1,20 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { getCookie, setCookie } from 'cookies-next';
+import Cookies from "js-cookie";
 
 export default function Login() {
 
     useEffect(() => {
         const fetchData = async () =>{
-            if(getCookie('usuario')!=undefined){
-                setMatricula(getCookie('usuario'))
+            if(Cookies.get('usuario')!=undefined){
+                setMatricula(Cookies.get('usuario'))
                     const usuario = await axios.get('http://localhost:8083/users',{
                   params: {
                       matricula,
                   },
                 });
                     if(usuario.data){
-                        setCookie('usuario', usuario.data.matricula);
+                        Cookies.set('usuario', usuario.data.matricula);
                         if(usuario.data.tipo == "Aluno"){
                             window.location.href = "http://localhost:3000/Aluno";
                         } else if(usuario.data.tipo == "Professor"){
@@ -51,7 +51,7 @@ export default function Login() {
                   },
                 });
                     if(usuario.data){
-                        setCookie('usuario', usuario.data.matricula);
+                        Cookies.set('usuario', usuario.data.matricula);
                         if(usuario.data.tipo == "Aluno"){
                             window.location.href = "http://localhost:3000/Aluno";
                         } else if(usuario.data.tipo == "Professor"){
