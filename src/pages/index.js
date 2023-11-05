@@ -1,4 +1,4 @@
-import MyComponent from '../../component/bdComponent.jsx'
+import MyComponent from '../component/bdComponent.jsx'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function Home() {

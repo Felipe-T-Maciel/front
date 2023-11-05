@@ -1,4 +1,4 @@
-import HeaderComponent from "../../component/HeaderComponent";
+import HeaderComponent from "../component/HeaderComponent";
 import axios from "axios";
 import { getCookie } from 'cookies-next';
 import { useEffect, useState } from "react";

@@ -1,8 +1,8 @@
 import axios from "axios";
 import { getCookie } from 'cookies-next';
 import { useEffect, useState } from "react";
-import CriarTurma from "../../component/CriarTurmaComponent";
-import HeaderComponent from "../../component/HeaderComponent";
+import CriarTurma from "../component/CriarTurmaComponent";
+import HeaderComponent from "../component/HeaderComponent";
 export default function Aluno() {
 
     const [aberto, setAberto] = useState(false)
